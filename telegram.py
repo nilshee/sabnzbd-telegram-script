@@ -6,12 +6,15 @@ except:
     print("No commandline parameters found, pls specify bot token and chat_id as following(without whitespace and with ',' as seperator) 'bot_token,chat_id' in optional parameters")
     sys.exit(1)
 
-# continue script
+# get bot_token and chat_id from addtional parameters
 bot_token, chat_id =parameters.split(",")
+#specify url of api endpoint
 url= "https://api.telegram.org/bot" + bot_token + "/sendMessage"
-# Your code goes here
+#specify data for the api endpoint
 data = {"text": notification_title + "\nType: " + notification_type + "\n" + notification_text, "chat_id": chat_id}
+#finally send data
 response = requests.post(url=url, json=data)
+#validate response
 if response.status_code == 200:
     #everything is fine exit with 0
     sys.exit(0)
